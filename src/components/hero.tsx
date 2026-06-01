@@ -11,7 +11,12 @@ const STATS = [
 export function Hero() {
   return (
     <section className="relative overflow-hidden rule-b">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10 pt-12 md:pt-20 pb-14 md:pb-20">
+      {/* Decorative background shapes */}
+      <div className="absolute top-0 right-[5%] w-32 h-32 shape-blob bg-purple-light/40 -z-10 blur-3xl" />
+      <div className="absolute top-20 right-[2%] w-24 h-24 shape-circle bg-yellow-bright/30 -z-10" />
+      <div className="absolute bottom-1/3 left-[5%] w-40 h-40 shape-blob bg-purple-soft/50 -z-10 blur-2xl" />
+
+      <div className="mx-auto max-w-[1440px] px-5 md:px-10 pt-12 md:pt-20 pb-14 md:pb-20 relative z-10">
         {/* Masthead eyebrow */}
         <div className="flex items-center justify-between font-mono text-[0.72rem] uppercase tracking-[0.22em] text-muted mb-10 md:mb-16">
           <span className="flex items-center gap-2">
