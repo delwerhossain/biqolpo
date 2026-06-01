@@ -1,0 +1,253 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   BIQOLPO — Editorial Newsstand × Electric Signal
+   ───────────────────────────────────────────────────────────── */
+:root {
+  /* Ink + paper */
+  --ink: #0a0a0a;
+  --ink-soft: #1a1a1a;
+  --paper: #ffffff;
+  --paper-deep: #f5f5f3;
+  --paper-edge: #e8e8e4;
+
+  /* Signal (logo green) */
+  --signal: #00e83e;
+  --signal-soft: #0dba38;
+  --signal-deep: #079128;
+  --signal-glow: rgba(0, 232, 62, 0.35);
+
+  /* Greys */
+  --rule: #1a1a1a;
+  --muted: #6b6b6b;
+  --muted-soft: #9a9a9a;
+
+  /* Status accents */
+  --warn: #ff5a1f;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-sharp: cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-paper-edge: var(--paper-edge);
+  --color-signal: var(--signal);
+  --color-signal-soft: var(--signal-soft);
+  --color-signal-deep: var(--signal-deep);
+  --color-rule: var(--rule);
+  --color-muted: var(--muted);
+  --color-muted-soft: var(--muted-soft);
+  --color-warn: var(--warn);
+
+  --font-display: var(--f-display);
+  --font-body: var(--f-body);
+  --font-mono: var(--f-mono);
+}
+
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--f-body), system-ui, sans-serif;
+  font-feature-settings: "ss01", "ss02", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--ink);
+}
+
+/* Paper grain overlay — pure CSS noise */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+}
+
+/* Typography helpers */
+.font-display {
+  font-family: var(--f-display), Georgia, serif;
+  font-feature-settings: "ss01", "ss02";
+  letter-spacing: -0.02em;
+}
+.font-mono {
+  font-family: var(--f-mono), monospace;
+}
+
+/* Hairline rule */
+.rule-t {
+  border-top: 1px solid var(--ink);
+}
+.rule-b {
+  border-bottom: 1px solid var(--ink);
+}
+
+/* The dot — recurring signal motif */
+.dot {
+  display: inline-block;
+  width: 0.32em;
+  height: 0.32em;
+  border-radius: 999px;
+  background: var(--signal);
+  box-shadow: 0 0 0 0.08em var(--paper), 0 0 24px var(--signal-glow);
+  vertical-align: middle;
+  transform: translateY(-0.5em);
+}
+.dot-sm {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--signal);
+  display: inline-block;
+  box-shadow: 0 0 16px var(--signal-glow);
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 38s linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Staggered fade-up on load */
+@keyframes fade-up {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.fade-up {
+  animation: fade-up 0.9s var(--ease) both;
+}
+
+/* Signal pulse */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--signal-glow); }
+  50% { box-shadow: 0 0 0 14px transparent; }
+}
+.pulse {
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 0.95rem 1.6rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.01em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
+  position: relative;
+}
+.btn-primary:hover {
+  background: var(--signal);
+  color: var(--ink);
+  border-color: var(--ink);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 0.95rem 1.6rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.01em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--signal);
+}
+
+/* Category card hover */
+.cat-card {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
+  overflow: hidden;
+}
+.cat-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform: translateY(101%);
+  transition: transform 0.45s var(--ease-sharp);
+  z-index: 0;
+}
+.cat-card > * { position: relative; z-index: 1; }
+.cat-card:hover::after {
+  transform: translateY(0);
+}
+.cat-card:hover {
+  color: var(--paper);
+}
+.cat-card:hover .cat-arrow {
+  color: var(--signal);
+  transform: translate(6px, -6px) rotate(-45deg);
+}
+.cat-arrow {
+  transition: transform 0.45s var(--ease-sharp), color 0.3s var(--ease);
+}
+
+/* Featured card */
+.feat-card {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.feat-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+/* Arrow flourish */
+.arrow-glyph {
+  display: inline-block;
+  font-family: var(--f-display), serif;
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* Reset link focus */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
+/* Scrollbar — subtle */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--ink); border: 2px solid var(--paper); border-radius: 0; }
