@@ -24,8 +24,8 @@ export function Wordmark({
         height: `${h}px`,
         backgroundImage: "url('/biqolpo-watermark-v2.png')",
         backgroundRepeat: "no-repeat",
-        backgroundPosition: "center 51%",
-        backgroundSize: "auto 380%",
+        backgroundPosition: "left center",
+        backgroundSize: "contain",
         filter: invert ? "invert(1)" : "none",
       }}
     />
