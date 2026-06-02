@@ -20,7 +20,7 @@ export function Nav() {
             <Link
               key={l.label}
               href={l.href}
-              className="pill text-ink hover:bg-green-alt transition-colors"
+              className="pill text-ink hover:bg-signal/25 transition-colors"
             >
               {l.label}
             </Link>

@@ -63,45 +63,33 @@ const PICKS: Pick[] = [
 
 const COLOR: Record<
   Pick["color"],
-  { card: string; badge: string; accent: string; blob: string; line: string }
+  { badge: string; accent: string; line: string }
 > = {
   purple: {
-    card: "bg-green-alt",
     badge: "bg-signal-deep text-paper",
     accent: "text-signal-deep",
-    blob: "bg-signal-deep/20",
     line: "#079128",
   },
   yellow: {
-    card: "bg-yellow-light",
     badge: "bg-yellow-bright text-ink",
     accent: "text-ink",
-    blob: "bg-yellow-bright/40",
-    line: "#fbbf24",
+    line: "#079128",
   },
   green: {
-    card: "bg-signal/20",
-    badge: "bg-signal text-ink",
+    badge: "bg-signal/25 text-signal-deep",
     accent: "text-signal-deep",
-    blob: "bg-signal/40",
     line: "#079128",
   },
 };
 
 export function Featured() {
   return (
-    <section id="featured" className="relative bg-paper py-20 md:py-28 overflow-hidden">
-      {/* Floating decoration */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-10 left-[6%] w-24 h-24 blob-1 bg-green-alt/60 float-slow" />
-        <div className="absolute bottom-20 right-[5%] w-32 h-32 blob-3 bg-yellow-light/70 float-med" />
-      </div>
-
+    <section id="featured" className="bg-paper py-16 md:py-24">
       <div className="mx-auto max-w-[1320px] px-5 md:px-10">
         {/* Section header */}
         <div className="flex flex-wrap items-end justify-between gap-6 mb-14 md:mb-20">
           <div>
-            <div className="inline-flex items-center gap-2 pill bg-yellow-light border border-ink mb-5">
+            <div className="inline-flex items-center gap-2 pill bg-paper border border-ink/15 mb-4">
               <span className="w-2 h-2 rounded-full bg-signal-deep" />
               <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em]">
                 This week
@@ -136,20 +124,13 @@ export function Featured() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
           {PICKS.map((p, i) => {
             const c = COLOR[p.color];
-            const tilt = i % 2 === 0 ? "md:tilt-l" : "md:tilt-r";
             return (
               <article
                 key={i}
-                className={`${c.card} squircle p-7 md:p-8 relative overflow-hidden drop-card transition-transform duration-300 hover:-translate-y-2 ${tilt} hover:rotate-0`}
+                className="bg-paper border border-ink/10 squircle p-6 md:p-7 relative drop-card transition-all duration-300 hover:-translate-y-1 hover:border-signal-deep/40"
               >
-                {/* Blob decoration */}
-                <div
-                  className={`absolute -top-10 -right-10 w-32 h-32 blob-2 ${c.blob}`}
-                />
-                <div className="absolute top-6 right-6 w-12 h-12 dot-grid text-ink/20 rounded-full" />
-
                 {/* Header — tag + badge */}
-                <div className="relative flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-6">
                   <span className={`font-mono text-[0.7rem] uppercase tracking-[0.2em] ${c.accent}`}>
                     {p.tag}
                   </span>

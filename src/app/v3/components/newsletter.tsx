@@ -8,31 +8,18 @@ export function Newsletter() {
   const [sent, setSent] = useState(false);
 
   return (
-    <section className="relative bg-yellow-light py-20 md:py-28 overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-10 left-[5%] w-32 h-32 blob-1 bg-signal-deep/15 float-slow" />
-        <div className="absolute bottom-10 right-[8%] w-40 h-40 blob-3 bg-signal/30 float-med" />
-        <div className="absolute top-1/3 right-[10%] w-20 h-20 dot-grid text-signal-deep/30 rounded-full" />
-      </div>
-
+    <section className="bg-paper py-16 md:py-24">
       <div className="mx-auto max-w-[1100px] px-5 md:px-10">
-        <div className="bg-paper squircle p-8 md:p-12 relative overflow-hidden drop-card">
-          {/* Tape decoration top corners */}
-          <span className="tape -top-2 left-10 -rotate-12" />
-          <span className="tape -top-2 right-10 rotate-12" />
-
-          {/* Decoration blob */}
-          <div className="absolute -bottom-16 -right-16 w-48 h-48 blob-2 bg-green-alt/60" />
-
-          <div className="relative grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="bg-yellow-light border border-ink/15 squircle p-8 md:p-12 drop-card">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 pill bg-green-alt border border-ink mb-5">
+              <div className="inline-flex items-center gap-2 pill bg-paper border border-ink/15 mb-4">
                 <span className="w-2 h-2 rounded-full bg-signal-deep" />
                 <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em]">
                   Weekly swap
                 </span>
               </div>
-              <h2 className="font-display font-light leading-[1.05] tracking-[-0.025em] text-[clamp(2rem,4.5vw,3.5rem)] text-ink mb-5">
+              <h2 className="font-display font-light leading-[1.05] tracking-[-0.025em] text-[clamp(1.85rem,4.5vw,3.2rem)] text-ink mb-4">
                 One swap, every{" "}
                 <span className="relative inline-block scribble-underline">
                   <em className="italic text-signal-deep font-medium">
@@ -41,67 +28,64 @@ export function Newsletter() {
                   <svg viewBox="0 0 200 16" preserveAspectRatio="none">
                     <path
                       d="M4 9 Q 50 1 100 8 T 196 7"
-                      stroke="#fbbf24"
-                      strokeWidth="5"
+                      stroke="#079128"
+                      strokeWidth="4"
                       strokeLinecap="round"
                       fill="none"
                     />
                   </svg>
                 </span>
               </h2>
-              <p className="font-body text-ink/75 text-[1rem] leading-[1.6] max-w-[36ch]">
-                Short, well-researched. One product, one better alternative,
-                the why — and where to get it in Bangladesh.
+              <p className="font-body text-ink/70 text-[0.98rem] leading-[1.6] max-w-[36ch]">
+                Short, researched. One product, one better alternative, and where to get it in Bangladesh.
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-2">
-                <span className="pill bg-signal/30 text-ink text-[0.78rem] inline-flex items-center gap-1.5">
-                  <Check size={14} strokeWidth={2.5} /> No spam
+              <div className="mt-5 flex flex-wrap gap-2">
+                <span className="pill bg-paper text-ink border border-ink/15 text-[0.78rem] inline-flex items-center gap-1.5">
+                  <Check size={13} strokeWidth={2.5} className="text-signal-deep" /> No spam
                 </span>
-                <span className="pill bg-green-alt text-signal-deep text-[0.78rem] inline-flex items-center gap-1.5">
-                  <Check size={14} strokeWidth={2.5} /> No affiliate noise
+                <span className="pill bg-paper text-ink border border-ink/15 text-[0.78rem] inline-flex items-center gap-1.5">
+                  <Check size={13} strokeWidth={2.5} className="text-signal-deep" /> No affiliate noise
                 </span>
               </div>
             </div>
 
             <form
-              className="flex flex-col gap-4"
+              className="flex flex-col gap-3"
               onSubmit={(e) => {
                 e.preventDefault();
                 if (email.trim()) setSent(true);
               }}
             >
-              <label className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-ink/65">
+              <label className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-ink/60">
                 Your email
               </label>
-              <div className="flex flex-col gap-3">
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@bangladesh.bd"
-                  className="w-full bg-yellow-light/50 border-2 border-ink rounded-full px-5 py-3.5 text-ink placeholder:text-ink/40 font-body text-[1rem] outline-none focus:bg-paper focus:border-signal-deep transition"
-                />
-                <button
-                  type="submit"
-                  className="btn-pill justify-center w-full"
-                >
-                  {sent ? (
-                    <>
-                      <Check size={16} strokeWidth={2.5} /> Thanks. See you Friday.
-                    </>
-                  ) : (
-                    <>
-                      Subscribe
-                      <span className="btn-pill-arrow">
-                        <ArrowUpRight size={16} strokeWidth={2.5} />
-                      </span>
-                    </>
-                  )}
-                </button>
-              </div>
-              <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-ink/50">
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@bangladesh.bd"
+                className="w-full bg-paper border border-ink/20 rounded-full px-5 py-3.5 text-ink placeholder:text-ink/40 font-body text-[1rem] outline-none focus:border-signal-deep focus:shadow-[0_0_0_4px_var(--primary-tint)] transition min-h-[52px]"
+              />
+              <button
+                type="submit"
+                className="btn-pill justify-center w-full !min-h-[52px]"
+              >
+                {sent ? (
+                  <>
+                    <Check size={16} strokeWidth={2.5} /> Thanks. See you Friday.
+                  </>
+                ) : (
+                  <>
+                    Subscribe
+                    <span className="btn-pill-arrow">
+                      <ArrowUpRight size={16} strokeWidth={2.5} />
+                    </span>
+                  </>
+                )}
+              </button>
+              <p className="font-mono text-[0.66rem] uppercase tracking-[0.18em] text-ink/50 text-center">
                 Free · weekly · unsubscribe anytime
               </p>
             </form>

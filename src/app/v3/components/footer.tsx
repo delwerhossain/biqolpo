@@ -2,14 +2,8 @@ import { Logo } from "./logo";
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-paper relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 -z-0 opacity-30">
-        <div className="absolute -top-20 -left-10 w-72 h-72 blob-1 bg-signal-deep float-slow" />
-        <div className="absolute bottom-20 right-10 w-40 h-40 blob-2 bg-yellow-bright float-med" />
-        <div className="absolute top-1/2 left-1/3 w-24 h-24 dot-grid text-signal/30 rounded-full" />
-      </div>
-
-      <div className="mx-auto max-w-[1320px] px-5 md:px-10 pt-20 pb-10 relative">
+    <footer className="bg-ink text-paper">
+      <div className="mx-auto max-w-[1320px] px-5 md:px-10 pt-16 md:pt-20 pb-10">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-6">
             <div className="mb-5">
