@@ -1,177 +1,156 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { useState } from "react";
+import { Search, ArrowRight, TrendingUp } from "lucide-react";
+
+const CHIPS = [
+  "ChatGPT",
+  "Broiler chicken",
+  "Canva Pro",
+  "Soft drinks",
+  "Imported honey",
+  "Plastic bag",
+  "Netflix",
+  "Adobe",
+];
 
 export function Hero() {
-  return (
-    <section className="relative overflow-hidden bg-paper">
-      {/* Decorative floating shapes */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-20 left-[6%] w-20 h-20 blob-1 bg-green-alt/60 float-slow" />
-        <div className="absolute top-32 right-[8%] w-28 h-28 blob-2 bg-yellow-light/70 float-med" />
-        <div className="absolute bottom-24 left-[12%] w-32 h-32 blob-3 bg-green-alt/50 float-med" />
-        <div className="absolute bottom-32 right-[6%] w-16 h-16 rounded-full bg-yellow-bright/40 float-slow" />
-        <div className="absolute top-[40%] left-[3%] w-16 h-16 dot-grid text-signal-deep/30 rounded-full" />
-        <div className="absolute top-[55%] right-[4%] w-20 h-20 dot-grid text-yellow-bright/40 rounded-full" />
-      </div>
+  const [q, setQ] = useState("");
 
-      <div className="mx-auto max-w-[1320px] px-5 md:px-10 pt-8 md:pt-12 pb-20 md:pb-28 relative">
-        {/* Meta strip */}
-        <div className="flex items-center justify-end mb-10 md:mb-14">
-          <div className="hidden md:flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
-            <MapPin size={12} strokeWidth={2} className="text-signal-deep" />
-            Dhaka · Vol. 01 · Issue 01 · 2026
+  return (
+    <section className="relative bg-cream pt-10 md:pt-16 pb-14 md:pb-20">
+      <div className="mx-auto max-w-[1180px] px-5 md:px-10">
+        <div className="max-w-[820px] mx-auto text-center">
+          <div className="inline-flex items-center gap-2 v3-badge v3-badge-green mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+            Bangladesh-first alternative index
+          </div>
+
+          <h1 className="font-display font-light tracking-[-0.025em] leading-[1.05] text-[2.15rem] sm:text-[2.6rem] md:text-[3.4rem] lg:text-[4rem] text-text-deep">
+            Find{" "}
+            <span className="scribble-v3 text-primary-dark italic font-medium">
+              better
+            </span>{" "}
+            alternatives in Bangladesh.
+          </h1>
+
+          <p className="font-bn mt-5 text-[1rem] md:text-[1.1rem] leading-[1.6] text-muted-2 max-w-[60ch] mx-auto">
+            পণ্য, খাবার, app, service — সবকিছুর{" "}
+            <span className="text-primary-dark font-semibold">ভালো</span>,{" "}
+            <span className="text-primary-dark font-semibold">সস্তা</span>,{" "}
+            <span className="text-primary-dark font-semibold">local</span> বা{" "}
+            <span className="text-primary-dark font-semibold">free</span>{" "}
+            বিকল্প খুঁজুন।
+          </p>
+
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (q.trim()) {
+                window.location.href = `/alternatives?q=${encodeURIComponent(q)}`;
+              }
+            }}
+            className="mt-8 md:mt-10 relative max-w-[640px] mx-auto"
+          >
+            <Search
+              size={18}
+              strokeWidth={2.2}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-2 pointer-events-none"
+            />
+            <input
+              type="text"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Try ChatGPT, broiler chicken, Canva..."
+              className="v3-input pr-[112px]"
+              aria-label="Search alternatives"
+            />
+            <button
+              type="submit"
+              className="v3-btn absolute right-1.5 top-1/2 -translate-y-1/2 !min-h-[44px] !px-5 text-[0.88rem]"
+            >
+              Search
+              <ArrowRight size={15} strokeWidth={2.5} />
+            </button>
+          </form>
+
+          <div className="mt-6 -mx-5 px-5 overflow-x-auto hide-scrollbar md:overflow-visible md:mx-0 md:px-0">
+            <div className="flex items-center gap-2 md:flex-wrap md:justify-center w-max md:w-auto">
+              <span className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-2 shrink-0 mr-1">
+                Popular:
+              </span>
+              {CHIPS.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setQ(c)}
+                  className="v3-chip shrink-0 text-[0.82rem] !py-1.5 !px-3"
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Main grid */}
-        <div className="grid grid-cols-12 gap-x-6 gap-y-10 items-center">
-          {/* Left: circular image */}
-          <div className="col-span-12 md:col-span-3 lg:col-span-3 flex md:block justify-center order-2 md:order-1">
-            <div className="relative">
-              <div className="absolute -inset-4 blob-1 bg-green-alt -z-10 float-slow" />
-              <div className="w-44 h-44 md:w-52 md:h-52 rounded-full overflow-hidden border-[3px] border-ink shadow-[6px_6px_0_var(--ink)]">
-                <img
-                  src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=80"
-                  alt="Local Bangladeshi market"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <svg
-                className="absolute -bottom-10 -right-6 w-24 h-24 text-signal-deep tilt-r"
-                viewBox="0 0 100 100"
-                fill="none"
-              >
-                <path
-                  d="M10 20 Q 40 10 60 40 Q 75 60 70 80"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  fill="none"
-                />
-                <path
-                  d="M62 75 L 70 80 L 78 72"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                />
-              </svg>
+        <div className="mt-12 md:mt-16 max-w-[560px] mx-auto">
+          <div className="text-center mb-3">
+            <span className="inline-flex items-center gap-1.5 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-2">
+              <TrendingUp size={12} strokeWidth={2.5} className="text-primary" />
+              Trending swap
+            </span>
+          </div>
+
+          <Link
+            href="/alternatives"
+            className="v3-card block p-5 md:p-6"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <span className="v3-badge v3-badge-green">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                AI & Software
+              </span>
+              <span className="v3-badge v3-badge-yellow">Editor's pick</span>
             </div>
-          </div>
 
-          {/* Center: Headline */}
-          <div className="col-span-12 md:col-span-9 lg:col-span-7 order-1 md:order-2 text-center md:text-left">
-            <h1 className="font-display font-light leading-[1.02] tracking-[-0.03em] text-[clamp(2.4rem,7vw,5.6rem)] text-ink">
-              <span className="block">Find the</span>
-              <span className="block">
-                <span className="relative inline-block scribble-underline">
-                  <em className="italic text-signal-deep font-medium">
-                    smarter
-                  </em>
-                  <svg viewBox="0 0 200 16" preserveAspectRatio="none">
-                    <path
-                      d="M4 10 Q 50 0 100 9 T 196 6"
-                      stroke="#079128"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
-                      fill="none"
-                    />
-                  </svg>
-                </span>{" "}
-                <span className="text-ink">alternative</span>
-              </span>
-              <span className="block">
-                for{" "}
-                <span className="relative inline-block scribble-underline">
-                  <em className="italic text-ink font-medium">Bangladesh</em>
-                  <svg viewBox="0 0 200 16" preserveAspectRatio="none">
-                    <path
-                      d="M4 8 Q 50 16 100 7 T 196 9"
-                      stroke="#fbbf24"
-                      strokeWidth="5"
-                      strokeLinecap="round"
-                      fill="none"
-                    />
-                  </svg>
-                </span>
-              </span>
-            </h1>
-          </div>
-
-          {/* Right: spinning badge */}
-          <div className="col-span-12 md:col-span-3 lg:col-span-2 order-3 flex justify-center md:justify-end">
-            <div className="relative w-32 h-32 md:w-36 md:h-36">
-              <div className="absolute inset-0 spin-slow">
-                <svg viewBox="0 0 120 120" className="w-full h-full">
-                  <defs>
-                    <path
-                      id="badge-circle"
-                      d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"
-                      fill="none"
-                    />
-                  </defs>
-                  <text
-                    fontSize="11"
-                    letterSpacing="3"
-                    fill="var(--ink)"
-                    fontFamily="var(--f-mono), monospace"
-                    fontWeight="600"
-                  >
-                    <textPath href="#badge-circle">
-                      BIQOLPO · ALTERNATIVE INDEX · BIQOLPO ·
-                    </textPath>
-                  </text>
-                </svg>
+            <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+              <div className="text-left">
+                <div className="text-[0.7rem] uppercase tracking-[0.15em] text-muted-2 mb-1">
+                  From
+                </div>
+                <div className="font-display text-[1.2rem] md:text-[1.4rem] leading-tight text-text-deep/60 line-through decoration-2 decoration-accent">
+                  ChatGPT Plus
+                </div>
+                <div className="text-[0.78rem] text-muted-2 mt-0.5">৳2,400 / mo</div>
               </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-12 h-12 rounded-full bg-signal flex items-center justify-center border-2 border-ink">
-                  <span className="w-2.5 h-2.5 rounded-full bg-ink" />
+
+              <ArrowRight size={20} strokeWidth={2.2} className="text-primary" />
+
+              <div className="text-left">
+                <div className="text-[0.7rem] uppercase tracking-[0.15em] text-muted-2 mb-1">
+                  To
+                </div>
+                <div className="font-display text-[1.3rem] md:text-[1.55rem] leading-tight text-text-deep">
+                  DeepSeek + Gemini
+                </div>
+                <div className="text-[0.78rem] text-primary-dark font-semibold mt-0.5">
+                  Free
                 </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Subtitle + CTA */}
-        <div className="mt-12 md:mt-16 max-w-2xl mx-auto md:mx-0 text-center md:text-left">
-          <p className="font-body text-[1.05rem] md:text-[1.15rem] leading-[1.55] text-ink/75 mb-8">
-            Cheaper. Safer. Healthier. Local. Free. We index the better
-            everyday products, tools and services for Bangladesh — verified,
-            neutral, no paid placements.
-          </p>
-          <div className="flex flex-wrap items-center gap-3 justify-center md:justify-start">
-            <Link href="/alternatives" className="btn-pill">
-              Browse the index
-              <span className="btn-pill-arrow">
-                <ArrowUpRight size={16} strokeWidth={2.5} />
+            <div className="mt-5 pt-4 border-t border-border-soft flex items-center justify-between">
+              <span className="text-[0.82rem] text-muted-2">
+                Best for: <span className="text-text-deep font-medium">Free AI use</span>
               </span>
-            </Link>
-            <Link href="/about" className="btn-pill-ghost">
-              How it works
-            </Link>
-          </div>
-
-          {/* Hashtag pills */}
-          <div className="mt-10 flex flex-wrap gap-3 justify-center md:justify-start">
-            <span className="pill bg-green-alt text-signal-deep tilt-l">
-              #cheaper
-            </span>
-            <span className="pill bg-yellow-light text-ink tilt-r">
-              #healthier
-            </span>
-            <span className="pill bg-signal/30 text-ink tilt-l-strong">
-              #local
-            </span>
-            <span className="pill bg-signal-deep text-paper tilt-r">
-              #free
-            </span>
-            <span className="pill bg-ink text-paper tilt-l">#safer</span>
-          </div>
+              <span className="text-[0.82rem] text-primary-dark font-semibold inline-flex items-center gap-1">
+                View comparison <ArrowRight size={13} strokeWidth={2.5} />
+              </span>
+            </div>
+          </Link>
         </div>
       </div>
-
-      <div className="relative h-px bg-ink/10" />
     </section>
   );
 }

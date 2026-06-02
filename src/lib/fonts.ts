@@ -1,4 +1,11 @@
-import { Fraunces, Geist, JetBrains_Mono, Caveat } from "next/font/google";
+import {
+  Fraunces,
+  Geist,
+  JetBrains_Mono,
+  Caveat,
+  Inter,
+  Hind_Siliguri,
+} from "next/font/google";
 
 export const fraunces = Fraunces({
   variable: "--f-display",
@@ -29,9 +36,25 @@ export const caveat = Caveat({
   display: "swap",
 });
 
+export const inter = Inter({
+  variable: "--f-ui",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+export const hindSiliguri = Hind_Siliguri({
+  variable: "--f-bn",
+  subsets: ["bengali", "latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
 export const fontVariables = [
   fraunces.variable,
   geist.variable,
   jetbrainsMono.variable,
   caveat.variable,
+  inter.variable,
+  hindSiliguri.variable,
 ].join(" ");
