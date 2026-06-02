@@ -1,60 +1,97 @@
-import { Wordmark } from "./wordmark";
+import { Logo } from "./logo";
 
 export function Footer() {
   return (
-    <footer className="bg-paper">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10 pt-16 md:pt-20 pb-8">
+    <footer className="bg-ink text-paper">
+      <div className="mx-auto max-w-[1320px] px-5 md:px-10 pt-16 md:pt-20 pb-10">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-6">
-            <Wordmark size="lg" />
-            <p className="mt-5 max-w-[40ch] text-ink/75 leading-[1.55]">
-              Biqolpo is a Bangladesh-focused alternative discovery platform —
-              helping you find smarter, cheaper, safer and local options for
-              everyday products, tools and services.
+            <div className="mb-5">
+              <Logo size="lg" invert />
+            </div>
+            <p className="max-w-[42ch] text-paper/70 leading-[1.6] text-[1rem]">
+              Bangladesh-focused alternative discovery — helping you find{" "}
+              <span className="font-hand text-yellow-bright text-[1.15rem]">
+                smarter, cheaper, safer
+              </span>{" "}
+              options for everyday products, tools and services.
             </p>
+
+            <div className="mt-7 flex flex-wrap gap-2">
+              <a
+                href="https://www.youtube.com/@biqolpo"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="pill bg-paper/10 text-paper border border-paper/20 hover:bg-signal-deep hover:border-signal-deep transition"
+              >
+                YouTube
+              </a>
+              <a
+                href="https://www.instagram.com/biqolpo.bd"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="pill bg-paper/10 text-paper border border-paper/20 hover:bg-yellow-bright hover:text-ink hover:border-yellow-bright transition"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://www.facebook.com/biqolpo.bd"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="pill bg-paper/10 text-paper border border-paper/20 hover:bg-signal hover:text-ink hover:border-signal transition"
+              >
+                Facebook
+              </a>
+            </div>
           </div>
 
           <div className="col-span-6 md:col-span-2">
-            <div className="font-mono text-[0.72rem] uppercase tracking-[0.22em] text-muted mb-4">Index</div>
-            <ul className="space-y-2.5 text-[0.96rem]">
-              <li><a href="#categories" className="hover:text-signal-deep transition-colors">Categories</a></li>
-              <li><a href="#featured" className="hover:text-signal-deep transition-colors">This week</a></li>
-              <li><a href="#how" className="hover:text-signal-deep transition-colors">How we work</a></li>
-              <li><a href="#join" className="hover:text-signal-deep transition-colors">Community</a></li>
+            <div className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-paper/50 mb-4">
+              Index
+            </div>
+            <ul className="space-y-3 text-[0.98rem]">
+              <li><a href="/#categories" className="hover:text-signal transition-colors">Categories</a></li>
+              <li><a href="/#featured" className="hover:text-signal transition-colors">This week</a></li>
+              <li><a href="/#how" className="hover:text-signal transition-colors">How it works</a></li>
+              <li><a href="/#join" className="hover:text-signal transition-colors">Community</a></li>
             </ul>
           </div>
 
           <div className="col-span-6 md:col-span-2">
-            <div className="font-mono text-[0.72rem] uppercase tracking-[0.22em] text-muted mb-4">Social</div>
-            <ul className="space-y-2.5 text-[0.96rem]">
-              <li><a href="https://www.youtube.com/@biqolpo" target="_blank" rel="noreferrer noopener" className="hover:text-signal-deep">YouTube</a></li>
-              <li><a href="https://www.instagram.com/biqolpo.bd" target="_blank" rel="noreferrer noopener" className="hover:text-signal-deep">Instagram</a></li>
-              <li><a href="https://www.facebook.com/biqolpo.bd" target="_blank" rel="noreferrer noopener" className="hover:text-signal-deep">Facebook</a></li>
+            <div className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-paper/50 mb-4">
+              Site
+            </div>
+            <ul className="space-y-3 text-[0.98rem]">
+              <li><a href="/" className="hover:text-signal transition-colors">Home</a></li>
+              <li><a href="/alternatives" className="hover:text-signal transition-colors">All swaps</a></li>
+              <li><a href="/about" className="hover:text-signal transition-colors">About</a></li>
+              <li><a href="/trash" className="hover:text-signal transition-colors">Archive</a></li>
             </ul>
           </div>
 
           <div className="col-span-12 md:col-span-2">
-            <div className="font-mono text-[0.72rem] uppercase tracking-[0.22em] text-muted mb-4">Contact</div>
-            <ul className="space-y-2.5 text-[0.96rem]">
-              <li><a href="mailto:hello@biqolpo.com" className="hover:text-signal-deep">hello@biqolpo.com</a></li>
-              <li className="text-muted">Dhaka, Bangladesh</li>
+            <div className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-paper/50 mb-4">
+              Contact
+            </div>
+            <ul className="space-y-3 text-[0.98rem]">
+              <li><a href="mailto:hello@biqolpo.com" className="hover:text-signal">hello@biqolpo.com</a></li>
+              <li className="text-paper/55">Dhaka, Bangladesh</li>
             </ul>
           </div>
         </div>
 
-        {/* Giant footer wordmark */}
-        <div className="mt-16 md:mt-24 rule-t pt-8 pb-2 overflow-hidden">
-          <div className="text-center select-none">
-            <div className="leading-none">
-              <Wordmark size="display" />
-            </div>
+        {/* Giant wordmark */}
+        <div className="mt-20 border-t border-paper/15 pt-10 pb-4 overflow-hidden text-center">
+          <div className="font-display italic text-[clamp(4rem,18vw,16rem)] leading-[0.85] tracking-[-0.04em] text-paper/15 select-none">
+            biqolpo.
           </div>
         </div>
 
-        <div className="rule-t pt-5 flex flex-wrap items-center justify-between gap-3 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-muted">
+        <div className="border-t border-paper/15 pt-6 flex flex-wrap items-center justify-between gap-3 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-paper/50">
           <span>© 2026 Biqolpo · The Alternative Index</span>
           <span className="flex items-center gap-2">
-            <span className="dot-sm" /> Made in Bangladesh
+            <span className="w-2 h-2 rounded-full bg-signal" />
+            Made in Bangladesh
           </span>
         </div>
       </div>

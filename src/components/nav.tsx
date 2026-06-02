@@ -1,47 +1,41 @@
 import Link from "next/link";
-import { Wordmark } from "./wordmark";
-
-const SOCIAL = [
-  { label: "IG", href: "https://www.instagram.com/biqolpo.bd" },
-  { label: "FB", href: "https://www.facebook.com/biqolpo.bd" },
-  { label: "YT", href: "https://www.youtube.com/@biqolpo" },
-];
+import { ArrowUpRight } from "lucide-react";
+import { Logo } from "./logo";
 
 export function Nav() {
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-md bg-[color:var(--paper)]/85 rule-b">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10 h-16 md:h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2" aria-label="Biqolpo home">
-          <Wordmark size="md" />
+    <header className="sticky top-0 z-40 backdrop-blur-md bg-paper/85 border-b border-ink/10">
+      <div className="mx-auto max-w-[1320px] px-5 md:px-10 h-16 md:h-20 flex items-center justify-between">
+        <Link href="/" aria-label="Biqolpo home" className="flex items-center">
+          <Logo size="md" />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-9 font-mono text-[0.78rem] uppercase tracking-[0.18em] text-ink">
-          <Link href="/alternatives" className="hover:text-signal-deep transition-colors">Index</Link>
-          <Link href="/about" className="hover:text-signal-deep transition-colors">About</Link>
-          <Link href="/#how" className="hover:text-signal-deep transition-colors">How</Link>
-          <Link href="/#join" className="hover:text-signal-deep transition-colors">Join</Link>
+        <nav className="hidden md:flex items-center gap-1">
+          {[
+            { label: "Home", href: "/" },
+            { label: "Index", href: "/alternatives" },
+            { label: "About", href: "/about" },
+            { label: "Join", href: "/#join" },
+          ].map((l) => (
+            <Link
+              key={l.label}
+              href={l.href}
+              className="pill text-ink hover:bg-signal/25 transition-colors"
+            >
+              {l.label}
+            </Link>
+          ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <div className="hidden sm:flex items-center gap-1 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted">
-            {SOCIAL.map((s, i) => (
-              <span key={s.label} className="flex items-center gap-1">
-                <a
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="hover:text-ink transition-colors"
-                >
-                  {s.label}
-                </a>
-                {i < SOCIAL.length - 1 && <span className="text-muted-soft">·</span>}
-              </span>
-            ))}
-          </div>
-          <Link href="/#join" className="btn-primary !py-2.5 !px-4 text-[0.78rem] uppercase tracking-[0.16em]">
-            Join <span className="dot-sm pulse" />
-          </Link>
-        </div>
+        <Link
+          href="/#join"
+          className="btn-pill !py-2.5 !px-5 text-[0.8rem]"
+        >
+          Contact us
+          <span className="btn-pill-arrow !w-7 !h-7">
+            <ArrowUpRight size={14} strokeWidth={2.5} />
+          </span>
+        </Link>
       </div>
     </header>
   );

@@ -1,24 +1,22 @@
+import { Quote } from "lucide-react";
+
 export function PullQuote() {
   return (
-    <section className="rule-b bg-ink text-paper overflow-hidden">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10 py-20 md:py-32 grid grid-cols-12 gap-6">
-        <div className="hidden md:block col-span-2 font-mono text-[0.72rem] uppercase tracking-[0.22em] text-paper/50 pt-6">
-          § 04 <br /> Manifesto
-        </div>
-        <blockquote className="col-span-12 md:col-span-10 font-display font-light italic text-[clamp(2rem,6vw,5.6rem)] leading-[1.05] tracking-[-0.025em]">
-          <span className="text-signal not-italic font-display">&ldquo;</span>
-          Better is not always more.
-          <br />
-          Sometimes better is <em className="not-italic font-display text-signal">local</em>.
-          <br />
-          Sometimes <em className="not-italic font-display text-signal">free</em>.
-          <br />
-          Sometimes the one your neighbour
-          <br /> already <em>quietly</em> trusted.
-          <span className="text-signal not-italic font-display">&rdquo;</span>
+    <section className="bg-signal-deep text-paper py-16 md:py-24">
+      <div className="mx-auto max-w-[860px] px-5 md:px-10 text-center">
+        <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-paper/10 border border-paper/20 text-paper mb-6">
+          <Quote size={18} strokeWidth={2.2} />
+        </span>
+
+        <blockquote className="font-display font-light leading-[1.15] tracking-[-0.02em] text-[clamp(1.6rem,4.5vw,3.4rem)] max-w-[26ch] mx-auto">
+          Not every product needs a{" "}
+          <em className="italic text-yellow-bright font-medium">better</em>{" "}
+          version. But yours{" "}
+          <em className="italic text-paper">might.</em>
         </blockquote>
-        <div className="col-span-12 md:col-start-3 md:col-span-10 font-mono text-[0.74rem] uppercase tracking-[0.22em] text-paper/60 mt-4 flex items-center gap-3">
-          <span className="dot-sm" /> Editor&apos;s note · The Alternative Index
+
+        <div className="mt-7 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-paper/10 border border-paper/20 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-paper/80">
+          Editor&apos;s note · The Alternative Index
         </div>
       </div>
     </section>

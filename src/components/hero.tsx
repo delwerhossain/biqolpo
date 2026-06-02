@@ -1,95 +1,120 @@
 import Link from "next/link";
-import { Wordmark } from "./wordmark";
-
-const STATS = [
-  { k: "240+", v: "Swaps indexed" },
-  { k: "08", v: "Categories" },
-  { k: "52/yr", v: "Weekly issues" },
-  { k: "00", v: "Paid placements" },
-];
+import { ArrowUpRight } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden rule-b">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10 pt-12 md:pt-20 pb-14 md:pb-20">
-        {/* Masthead eyebrow */}
-        <div className="flex items-center justify-between font-mono text-[0.72rem] uppercase tracking-[0.22em] text-muted mb-10 md:mb-16">
-          <span className="flex items-center gap-2">
-            <span className="dot-sm" /> Vol. 01 · Issue 01
-          </span>
-          <span className="hidden sm:inline">Dhaka · Est. 2026</span>
-          <span>The Alternative Index</span>
-        </div>
+    <section className="relative overflow-hidden bg-paper">
+      <div className="mx-auto max-w-[1320px] px-5 md:px-10 pt-10 md:pt-16 pb-16 md:pb-24 relative">
+        {/* Main grid */}
+        <div className="grid grid-cols-12 gap-x-6 gap-y-8 md:gap-y-10 items-center">
+          {/* Left: circular image */}
+          <div className="col-span-12 md:col-span-3 lg:col-span-3 flex md:block justify-center order-2 md:order-1">
+            <div className="relative">
+              <div className="w-36 h-36 md:w-48 md:h-48 rounded-full overflow-hidden border-[3px] border-ink shadow-[5px_5px_0_var(--ink)]">
+                <img
+                  src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=80"
+                  alt="Local Bangladeshi market"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
 
-        <div className="grid grid-cols-12 gap-x-4 md:gap-x-8 gap-y-6 items-end">
-          <h1 className="col-span-12 lg:col-span-10 font-display font-light leading-[0.92] tracking-[-0.035em] text-[clamp(2.8rem,9.2vw,9.5rem)] fade-up">
-            <span className="block">Find the</span>
-            <span className="block">
-              <em className="italic font-light">better</em>{" "}
-              <span className="relative inline-block">
-                alternative
-                <span className="absolute -right-3 md:-right-6 top-0 md:top-2">
-                  <span className="dot-sm pulse" />
-                </span>
+          {/* Center: Headline */}
+          <div className="col-span-12 md:col-span-9 lg:col-span-7 order-1 md:order-2 text-center md:text-left">
+            <h1 className="font-display font-light leading-[1.04] tracking-[-0.03em] text-[clamp(2.2rem,7vw,5.2rem)] text-ink">
+              <span className="block">Find the</span>
+              <span className="block mb-4">
+                <span className="relative inline-block scribble-underline">
+                  <em className="italic text-signal-deep font-medium">
+                    smarter
+                  </em>
+                  <svg viewBox="0 0 200 16" preserveAspectRatio="none">
+                    <path
+                      d="M4 10 Q 50 0 100 9 T 196 6"
+                      stroke="#079128"
+                      strokeWidth="3.5"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+                  </svg>
+                </span>{" "}
+                <span className="text-ink">alternative</span>
               </span>
-            </span>
-            <span className="block text-muted">— for Bangladesh.</span>
-          </h1>
-
-          <div className="col-span-12 lg:col-span-8 lg:col-start-1 mt-4 lg:mt-10 fade-up" style={{ animationDelay: "0.15s" }}>
-            <p className="text-[1.05rem] md:text-[1.22rem] leading-[1.5] text-ink/85 max-w-[44ch]">
-              A neutral, Bangladesh-first index of smarter swaps —
-              cheaper, safer, healthier, local, free. From AI tools to
-              broiler chicken, from imports to the maker down your street.
-            </p>
+              <span className="block">
+                for <em className="italic text-ink font-medium">Bangladesh.</em>
+              </span>
+            </h1>
           </div>
 
-          <div className="col-span-12 lg:col-span-4 lg:col-start-9 lg:row-start-2 lg:-mt-2 fade-up" style={{ animationDelay: "0.3s" }}>
-            <div className="font-mono text-[0.72rem] uppercase tracking-[0.22em] text-muted mb-3">
-              § 01 — Mission
-            </div>
-            <div className="font-display italic text-[1.4rem] leading-[1.25] text-ink">
-              &ldquo;Not every product needs a better version.
-              <br />
-              <span className="text-signal-deep">But yours might.</span>&rdquo;
+          {/* Right: spinning badge */}
+          <div className="col-span-12 md:col-span-3 lg:col-span-2 order-3 hidden md:flex justify-center md:justify-end">
+            <div className="relative w-28 h-28 md:w-32 md:h-32">
+              <div className="absolute inset-0 spin-slow">
+                <svg viewBox="0 0 120 120" className="w-full h-full">
+                  <defs>
+                    <path
+                      id="badge-circle"
+                      d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"
+                      fill="none"
+                    />
+                  </defs>
+                  <text
+                    fontSize="11"
+                    letterSpacing="3"
+                    fill="var(--ink)"
+                    fontFamily="var(--f-mono), monospace"
+                    fontWeight="600"
+                  >
+                    <textPath href="#badge-circle">
+                      BIQOLPO · ALTERNATIVE INDEX · BIQOLPO ·
+                    </textPath>
+                  </text>
+                </svg>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-11 h-11 rounded-full bg-signal-deep flex items-center justify-center border-2 border-ink">
+                  <span className="w-2 h-2 rounded-full bg-paper" />
+                </div>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div className="col-span-12 mt-8 md:mt-12 flex flex-wrap items-center gap-3 fade-up" style={{ animationDelay: "0.45s" }}>
-            <Link href="/alternatives" className="btn-primary">
+        {/* Subtitle + CTA */}
+        <div className="mt-10 md:mt-14 max-w-2xl mx-auto md:mx-0 text-center md:text-left">
+          <p className="font-body text-[1rem] md:text-[1.15rem] leading-[1.6] text-ink/70 mb-7">
+            Cheaper. Safer. Healthier. Local. Free. We index the better
+            everyday products, tools and services for Bangladesh — verified,
+            neutral, no paid placements.
+          </p>
+          <div className="flex flex-wrap items-center gap-3 justify-center md:justify-start">
+            <Link href="/alternatives" className="btn-pill">
               Browse the index
-              <span className="arrow-glyph">→</span>
+              <span className="btn-pill-arrow">
+                <ArrowUpRight size={16} strokeWidth={2.5} />
+              </span>
             </Link>
-            <Link href="/about" className="btn-ghost">
-              How we work
+            <Link href="/about" className="btn-pill-ghost">
+              How it works
             </Link>
-            <span className="ml-auto hidden md:flex font-mono text-[0.74rem] uppercase tracking-[0.18em] text-muted items-center gap-2">
-              Scroll <span>↓</span>
-            </span>
+          </div>
+
+          {/* Hashtag pills — unified palette */}
+          <div className="mt-8 flex flex-wrap gap-2 justify-center md:justify-start">
+            {["#cheaper", "#healthier", "#local", "#free", "#safer"].map((t) => (
+              <span
+                key={t}
+                className="pill bg-paper border border-ink/15 text-ink/75 hover:border-signal-deep hover:text-signal-deep transition-colors text-[0.82rem] !py-1.5 !px-3"
+              >
+                {t}
+              </span>
+            ))}
           </div>
         </div>
-
-        {/* Stats strip */}
-        <div className="mt-12 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-ink border border-ink fade-up" style={{ animationDelay: "0.6s" }}>
-          {STATS.map((s) => (
-            <div key={s.v} className="bg-paper p-5 md:p-7">
-              <div className="font-display text-[2rem] md:text-[2.6rem] leading-none tracking-[-0.02em]">
-                {s.k}
-              </div>
-              <div className="mt-2 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted">
-                {s.v}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
 
-      {/* Watermark */}
-      <div className="pointer-events-none absolute -right-32 md:-right-20 -bottom-24 md:-bottom-32 opacity-[0.06] select-none">
-        <div className="leading-none">
-          <Wordmark size="display" />
-        </div>
-      </div>
+      <div className="relative h-px bg-ink/10" />
     </section>
   );
 }

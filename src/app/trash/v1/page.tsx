@@ -9,7 +9,7 @@ import { SocialWall } from "./components/social-wall";
 import { Newsletter } from "./components/newsletter";
 import { Footer } from "./components/footer";
 
-export default function V2HomePage() {
+export default function TrashV1Page() {
   return (
     <>
       <Nav />
