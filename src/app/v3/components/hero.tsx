@@ -6,10 +6,10 @@ export function Hero() {
     <section className="relative overflow-hidden bg-paper">
       <div className="mx-auto max-w-[1320px] px-5 md:px-10 pt-8 md:pt-14 pb-16 md:pb-24 relative">
         {/* Meta strip */}
-        <div className="flex items-center justify-end mb-8 md:mb-12">
+        <div className="flex items-center justify-end mb-8 md:mb-14">
           <div className="hidden md:flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-ink/55">
-            <MapPin size={12} strokeWidth={2} className="text-signal-deep" />
-            Dhaka · Vol. 01 · Issue 01 · 2026
+            {/* <MapPin size={12} strokeWidth={2} className="text-signal-deep" />
+            Dhaka · Vol. 01 · Issue 01 · 2026 */}
           </div>
         </div>
 
@@ -32,7 +32,7 @@ export function Hero() {
           <div className="col-span-12 md:col-span-9 lg:col-span-7 order-1 md:order-2 text-center md:text-left">
             <h1 className="font-display font-light leading-[1.04] tracking-[-0.03em] text-[clamp(2.2rem,7vw,5.2rem)] text-ink">
               <span className="block">Find the</span>
-              <span className="block">
+              <span className="block mb-4">
                 <span className="relative inline-block scribble-underline">
                   <em className="italic text-signal-deep font-medium">
                     smarter
