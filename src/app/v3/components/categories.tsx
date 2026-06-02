@@ -12,101 +12,95 @@ import {
 } from "lucide-react";
 import { CATEGORIES, SWAPS } from "@/lib/swaps";
 
-type CatStyle = {
-  bg: string;
-  text: string;
-  blob: string;
-  Icon: typeof Sparkles;
-  tilt: string;
+type Variant = "default" | "feature" | "dark";
+
+const STYLES: Record<
+  string,
+  { variant: Variant; Icon: typeof Sparkles }
+> = {
+  "ai-software": { variant: "feature", Icon: Sparkles },
+  "tech-gadgets": { variant: "default", Icon: Smartphone },
+  food: { variant: "default", Icon: Wheat },
+  local: { variant: "default", Icon: Hammer },
+  healthier: { variant: "default", Icon: Leaf },
+  budget: { variant: "default", Icon: Wallet },
+  eco: { variant: "default", Icon: Recycle },
+  services: { variant: "dark", Icon: Wrench },
 };
 
-const STYLES: Record<string, CatStyle> = {
-  "ai-software": {
-    bg: "bg-signal-deep",
-    text: "text-paper",
-    blob: "bg-yellow-bright",
-    Icon: Sparkles,
-    tilt: "tilt-l",
+const CARD: Record<
+  Variant,
+  {
+    card: string;
+    title: string;
+    hint: string;
+    iconWrap: string;
+    iconColor: string;
+    divider: string;
+    metaText: string;
+    arrow: string;
+  }
+> = {
+  default: {
+    card: "bg-paper border border-ink/10 hover:border-signal-deep/40",
+    title: "text-ink",
+    hint: "text-ink/55",
+    iconWrap: "bg-signal/15",
+    iconColor: "text-signal-deep",
+    divider: "border-ink/10",
+    metaText: "text-ink/55",
+    arrow: "bg-paper-deep text-ink/60 group-hover:bg-signal-deep group-hover:text-paper",
   },
-  "tech-gadgets": {
-    bg: "bg-yellow-light",
-    text: "text-ink",
-    blob: "bg-signal-deep",
-    Icon: Smartphone,
-    tilt: "tilt-r",
+  feature: {
+    card: "bg-signal-deep border border-signal-deep hover:bg-ink hover:border-ink",
+    title: "text-paper",
+    hint: "text-paper/70",
+    iconWrap: "bg-paper/15",
+    iconColor: "text-paper",
+    divider: "border-paper/15",
+    metaText: "text-paper/65",
+    arrow: "bg-paper text-ink",
   },
-  food: {
-    bg: "bg-signal/30",
-    text: "text-ink",
-    blob: "bg-yellow-bright",
-    Icon: Wheat,
-    tilt: "tilt-l",
-  },
-  local: {
-    bg: "bg-green-alt",
-    text: "text-signal-deep",
-    blob: "bg-signal",
-    Icon: Hammer,
-    tilt: "tilt-r",
-  },
-  healthier: {
-    bg: "bg-yellow-light",
-    text: "text-ink",
-    blob: "bg-signal-deep",
-    Icon: Leaf,
-    tilt: "tilt-l",
-  },
-  budget: {
-    bg: "bg-yellow-bright",
-    text: "text-ink",
-    blob: "bg-ink",
-    Icon: Wallet,
-    tilt: "tilt-r",
-  },
-  eco: {
-    bg: "bg-green-alt/30",
-    text: "text-ink",
-    blob: "bg-yellow-bright",
-    Icon: Recycle,
-    tilt: "tilt-l",
-  },
-  services: {
-    bg: "bg-ink",
-    text: "text-paper",
-    blob: "bg-signal",
-    Icon: Wrench,
-    tilt: "tilt-r",
+  dark: {
+    card: "bg-ink border border-ink hover:bg-signal-deep hover:border-signal-deep",
+    title: "text-paper",
+    hint: "text-paper/65",
+    iconWrap: "bg-signal/20",
+    iconColor: "text-signal",
+    divider: "border-paper/15",
+    metaText: "text-paper/55",
+    arrow: "bg-signal text-ink",
   },
 };
 
 export function Categories() {
   return (
-    <section id="categories" className="relative bg-green-alt/40 py-20 md:py-28 overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-10 right-10 w-24 h-24 dot-grid text-signal-deep/30 rounded-full" />
-        <div className="absolute bottom-16 left-8 w-32 h-32 blob-2 bg-yellow-bright/30 float-slow" />
-        <div className="absolute top-1/2 right-[3%] w-20 h-20 rounded-full bg-signal-deep/15 float-med" />
-      </div>
-
-      <div className="mx-auto max-w-[1320px] px-5 md:px-10 relative">
-        <div className="text-center mb-14 md:mb-20">
-          <div className="inline-flex items-center gap-2 pill bg-paper border border-ink mb-6">
-            <span className="w-2 h-2 rounded-full bg-signal" />
-            <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em]">
+    <section
+      id="categories"
+      className="bg-paper-deep py-20 md:py-28 border-t border-b border-ink/5"
+    >
+      <div className="mx-auto max-w-[1320px] px-5 md:px-10">
+        {/* Header */}
+        <div className="text-center mb-12 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-paper border border-ink/10 mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-signal-deep" />
+            <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-ink/70">
               Eight categories
             </span>
           </div>
-          <h2 className="font-display font-light leading-[1.05] tracking-[-0.025em] text-[clamp(2rem,5.5vw,4.2rem)] text-ink max-w-[20ch] mx-auto">
+          <h2 className="font-display font-light leading-[1.05] tracking-[-0.025em] text-[clamp(2rem,5vw,3.8rem)] text-ink max-w-[22ch] mx-auto">
             Every category has a{" "}
-            <span className="relative inline-block scribble-underline">
-              <em className="italic text-signal-deep font-medium">
-                better
-              </em>
-              <svg viewBox="0 0 200 16" preserveAspectRatio="none">
+            <span className="relative inline-block">
+              <em className="italic text-signal-deep font-medium">better</em>
+              <svg
+                viewBox="0 0 200 16"
+                preserveAspectRatio="none"
+                className="absolute -bottom-2 left-0 w-full h-3"
+              >
                 <path
                   d="M4 9 Q 50 1 100 8 T 196 7"
-                  stroke="#fbbf24"
-                  strokeWidth="5"
+                  stroke="#079128"
+                  strokeWidth="3"
                   strokeLinecap="round"
                   fill="none"
                 />
@@ -114,52 +108,58 @@ export function Categories() {
             </span>{" "}
             version.
           </h2>
-          <p className="mt-6 font-body text-ink/70 max-w-[52ch] mx-auto text-[1.02rem] leading-[1.55]">
-            From AI tools to broiler chicken — every section indexed,
-            verified, and Bangladesh-first.
+          <p className="mt-6 font-body text-ink/60 max-w-[52ch] mx-auto text-[1rem] leading-[1.55]">
+            From AI tools to broiler chicken — verified Bangladesh-first
+            alternatives, indexed by section.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {CATEGORIES.map((c, i) => {
+        {/* Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+          {CATEGORIES.map((c) => {
             const count = SWAPS.filter((s) => s.category === c.id).length;
             const s = STYLES[c.id];
+            const v = CARD[s.variant];
             const Icon = s.Icon;
             return (
               <Link
                 key={c.n}
                 href="/alternatives"
-                className={`${s.bg} ${s.text} squircle p-6 md:p-7 relative overflow-hidden group transition-all duration-300 hover:-translate-y-2 drop-card`}
+                className={`group rounded-2xl p-5 md:p-6 flex flex-col transition-all duration-200 hover:-translate-y-1 ${v.card}`}
               >
-                <div
-                  className={`absolute -top-8 -right-8 w-28 h-28 blob-${(i % 3) + 1} ${s.blob} opacity-50`}
-                />
-
-                <div className="relative flex items-center justify-between mb-12 md:mb-16">
-                  <span className="font-mono text-[0.65rem] uppercase tracking-[0.22em] opacity-70">
-                    {c.n}
-                  </span>
-                  <span className={`w-11 h-11 rounded-full bg-paper text-ink flex items-center justify-center ${s.tilt} shadow-[3px_3px_0_var(--ink)]`}>
+                <div className="flex items-center justify-between mb-8 md:mb-10">
+                  <span
+                    className={`w-11 h-11 rounded-full flex items-center justify-center ${v.iconWrap} ${v.iconColor}`}
+                  >
                     <Icon size={20} strokeWidth={2} />
+                  </span>
+                  <span
+                    className={`font-mono text-[0.65rem] uppercase tracking-[0.2em] ${v.metaText}`}
+                  >
+                    {c.n}
                   </span>
                 </div>
 
-                <div className="relative">
-                  <div className="font-display text-[1.55rem] md:text-[1.8rem] leading-[1.05] tracking-[-0.02em] mb-2">
-                    {c.name}
-                  </div>
-                  <div className="font-hand text-[1.15rem] opacity-80 mb-5">
-                    {c.hint}
-                  </div>
+                <div className={`font-display text-[1.4rem] md:text-[1.6rem] leading-[1.05] tracking-[-0.02em] mb-1.5 ${v.title}`}>
+                  {c.name}
+                </div>
+                <div className={`text-[0.88rem] leading-[1.45] ${v.hint} line-clamp-2`}>
+                  {c.hint}
+                </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-current/20">
-                    <span className="font-mono text-[0.65rem] uppercase tracking-[0.18em]">
-                      {count} swaps
-                    </span>
-                    <span className="w-7 h-7 rounded-full bg-paper text-ink flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                      <ArrowUpRight size={14} strokeWidth={2.5} />
-                    </span>
-                  </div>
+                <div
+                  className={`mt-5 pt-4 border-t ${v.divider} flex items-center justify-between`}
+                >
+                  <span
+                    className={`font-mono text-[0.7rem] uppercase tracking-[0.16em] ${v.metaText}`}
+                  >
+                    {count} swaps
+                  </span>
+                  <span
+                    className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${v.arrow}`}
+                  >
+                    <ArrowUpRight size={14} strokeWidth={2.5} />
+                  </span>
                 </div>
               </Link>
             );
