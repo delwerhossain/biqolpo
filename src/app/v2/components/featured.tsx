@@ -1,3 +1,7 @@
+"use client";
+
+import { Award, Heart, Tag } from "lucide-react";
+
 type Pick = {
   tag: string;
   from: string;
@@ -13,155 +17,228 @@ type Pick = {
 
 const PICKS: Pick[] = [
   {
-    tag: "§ AI & Software",
+    tag: "AI & Software",
     from: "ChatGPT Plus",
-    fromImage: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
+    fromImage:
+      "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
     to: "DeepSeek + Gemini",
-    toImage: "https://www.deepseek.com/favicon.ico",
+    toImage:
+      "https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/deepseek-color.png",
     reason:
       "Two free frontier models cover ~92% of paid-tier use cases. Use DeepSeek for code, Gemini for long context.",
     price: "৳2,400/mo  →  Free",
-    badge: "Editor’s pick",
-    meta: "Tested by editors · 11 days ago",
+    badge: "Editor's pick",
+    meta: "Tested · 11 days ago",
     color: "purple",
   },
   {
-    tag: "§ Food",
+    tag: "Food",
     from: "Broiler Chicken",
-    fromImage: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400&q=80",
+    fromImage:
+      "https://images.unsplash.com/photo-1587593810167-a84920ea0781?w=400&q=80",
     to: "Sonali / Deshi",
-    toImage: "https://images.unsplash.com/photo-1585238341710-4abb9278a74b?w=400&q=80",
+    toImage:
+      "https://images.unsplash.com/photo-1612170153139-6f881ff067e0?w=400&q=80",
     reason:
       "Lower antibiotic residue, better flavour, supports small Bangladeshi farms. Modest price premium worth it for weekly use.",
     price: "৳200/kg  →  ৳320/kg",
     badge: "Health pick",
-    meta: "Verified source · 4 days ago",
+    meta: "Verified · 4 days ago",
     color: "yellow",
   },
   {
-    tag: "§ Tools",
+    tag: "Tools",
     from: "Canva Pro",
     fromImage: "https://www.canva.com/favicon.ico",
     to: "Penpot",
-    toImage: "https://penpot.app/favicon.ico",
+    toImage: "https://penpot.app/images/favicon.png",
     reason:
       "Open-source, self-hostable, plays well with Figma exports. The Pro features you actually use are free here.",
     price: "৳1,500/mo  →  Free",
     badge: "Budget pick",
-    meta: "Community rated · 2 days ago",
+    meta: "Community · 2 days ago",
     color: "green",
   },
 ];
 
-const colorMap = {
+const COLOR: Record<
+  Pick["color"],
+  { card: string; badge: string; accent: string; blob: string; line: string }
+> = {
   purple: {
-    bg: "bg-purple-light",
-    text: "text-purple-vibrant",
+    card: "bg-purple-light",
     badge: "bg-purple-vibrant text-paper",
+    accent: "text-purple-vibrant",
+    blob: "bg-purple-vibrant/20",
+    line: "#7c3aed",
   },
   yellow: {
-    bg: "bg-yellow-light",
-    text: "text-ink",
+    card: "bg-yellow-light",
     badge: "bg-yellow-bright text-ink",
+    accent: "text-ink",
+    blob: "bg-yellow-bright/40",
+    line: "#fbbf24",
   },
   green: {
-    bg: "bg-green-alt/20",
-    text: "text-green-alt",
+    card: "bg-signal/20",
     badge: "bg-signal text-ink",
+    accent: "text-signal-deep",
+    blob: "bg-signal/40",
+    line: "#079128",
   },
 };
 
 export function Featured() {
   return (
-    <section id="featured" className="rule-b bg-paper relative py-16 md:py-24">
-      {/* Decorative shapes */}
-      <div className="absolute top-10 left-5% w-28 h-28 shape-blob bg-purple-soft/30 -z-10 blur-3xl" />
-      <div className="absolute bottom-10 right-10% w-32 h-32 shape-blob bg-yellow-light/40 -z-10 blur-2xl" />
+    <section id="featured" className="relative bg-paper py-20 md:py-28 overflow-hidden">
+      {/* Floating decoration */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute top-10 left-[6%] w-24 h-24 blob-1 bg-purple-light/60 float-slow" />
+        <div className="absolute bottom-20 right-[5%] w-32 h-32 blob-3 bg-yellow-light/70 float-med" />
+      </div>
 
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10 relative z-10">
-        <div className="flex flex-wrap items-end justify-between gap-6 mb-12 md:mb-16">
+      <div className="mx-auto max-w-[1320px] px-5 md:px-10">
+        {/* Section header */}
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-14 md:mb-20">
           <div>
-            <div className="font-mono text-[0.72rem] uppercase tracking-[0.22em] text-muted mb-3 flex items-center gap-2">
-              § 03 <span className="text-ink/30">/</span> This week
+            <div className="inline-flex items-center gap-2 pill bg-yellow-light border border-ink mb-5">
+              <span className="w-2 h-2 rounded-full bg-purple-vibrant" />
+              <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em]">
+                This week
+              </span>
             </div>
-            <h2 className="font-display font-light leading-[0.95] tracking-[-0.03em] text-[clamp(2rem,5.5vw,4.5rem)]">
-              The alternatives,
-              <br />
-              <em className="italic">handpicked.</em>
+            <h2 className="font-display font-light leading-[1.05] tracking-[-0.025em] text-[clamp(2rem,5.5vw,4.2rem)] text-ink">
+              The alternatives,{" "}
+              <span className="relative inline-block scribble-underline">
+                <em className="italic text-purple-vibrant font-medium">
+                  handpicked.
+                </em>
+                <svg viewBox="0 0 200 16" preserveAspectRatio="none">
+                  <path
+                    d="M4 9 Q 50 1 100 8 T 196 7"
+                    stroke="#7c3aed"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                </svg>
+              </span>
             </h2>
           </div>
-          <a href="/alternatives" className="font-mono text-[0.78rem] uppercase tracking-[0.18em] underline underline-offset-8 decoration-1 hover:text-signal-deep transition-colors">
+          <a
+            href="/alternatives"
+            className="btn-pill-ghost text-[0.85rem]"
+          >
             See all swaps →
           </a>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
           {PICKS.map((p, i) => {
-            const color = colorMap[p.color];
+            const c = COLOR[p.color];
+            const tilt = i % 2 === 0 ? "md:tilt-l" : "md:tilt-r";
             return (
               <article
                 key={i}
-                className={`${color.bg} shape-rounded p-7 md:p-9 flex flex-col gap-6 transition-transform hover:scale-105 hover:-translate-y-1`}
+                className={`${c.card} squircle p-7 md:p-8 relative overflow-hidden drop-card transition-transform duration-300 hover:-translate-y-2 ${tilt} hover:rotate-0`}
               >
-                <div className="flex items-start justify-between">
-                  <span className={`font-mono text-[0.72rem] uppercase tracking-[0.2em] ${color.text}`}>
+                {/* Blob decoration */}
+                <div
+                  className={`absolute -top-10 -right-10 w-32 h-32 blob-2 ${c.blob}`}
+                />
+                <div className="absolute top-6 right-6 w-12 h-12 dot-grid text-ink/20 rounded-full" />
+
+                {/* Header — tag + badge */}
+                <div className="relative flex items-center justify-between mb-6">
+                  <span className={`font-mono text-[0.7rem] uppercase tracking-[0.2em] ${c.accent}`}>
                     {p.tag}
                   </span>
-                  <span className={`font-mono text-[0.68rem] uppercase tracking-[0.16em] px-3 py-1.5 ${color.badge} rounded-full border border-current`}>
+                  <span className={`pill ${c.badge} text-[0.7rem] uppercase tracking-[0.14em] font-mono py-1 px-3 border border-ink/20 inline-flex items-center gap-1.5`}>
+                    {p.badge === "Editor's pick" && <Award size={12} strokeWidth={2.5} />}
+                    {p.badge === "Health pick" && <Heart size={12} strokeWidth={2.5} />}
+                    {p.badge === "Budget pick" && <Tag size={12} strokeWidth={2.5} />}
                     {p.badge}
                   </span>
                 </div>
 
-                <div className="flex-1 space-y-4">
-                  <div>
-                    <div className="font-mono text-[0.68rem] uppercase tracking-[0.22em] text-ink/60 mb-3">
-                      From
-                    </div>
-                    <div className="flex items-center gap-3 mb-3">
+                {/* FROM */}
+                <div className="relative mb-3">
+                  <div className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-ink/55 mb-2">
+                    From
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-paper border-2 border-ink/20 flex items-center justify-center overflow-hidden shrink-0">
                       <img
                         src={p.fromImage}
                         alt={p.from}
-                        className="w-8 h-8 object-contain"
+                        className="w-9 h-9 object-contain"
                         onError={(e) => {
-                          (e.target as HTMLImageElement).style.display = 'none';
+                          (e.target as HTMLImageElement).style.display = "none";
                         }}
                       />
-                      <div className="font-display text-[1.35rem] leading-[1.05] line-through decoration-warn decoration-[2px] text-ink/50">
-                        {p.from}
-                      </div>
+                    </div>
+                    <div className="font-display text-[1.25rem] leading-tight line-through decoration-2 decoration-warn text-ink/50">
+                      {p.from}
                     </div>
                   </div>
+                </div>
 
-                  <div className="flex items-center gap-2 text-ink/40">
-                    <span className="arrow-glyph italic text-[1.6rem]">↘</span>
-                    <div className="flex-1 h-px bg-ink/20" />
+                {/* Arrow */}
+                <div className="relative my-4 flex items-center justify-center">
+                  <svg
+                    className="w-20 h-10"
+                    viewBox="0 0 100 50"
+                    fill="none"
+                  >
+                    <path
+                      d="M 10 10 Q 50 50 90 15"
+                      stroke={c.line}
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+                    <path
+                      d="M 82 8 L 90 15 L 84 25"
+                      stroke={c.line}
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      fill="none"
+                    />
+                  </svg>
+                </div>
+
+                {/* TO */}
+                <div className="relative mb-5">
+                  <div className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-ink/55 mb-2">
+                    To
                   </div>
-
-                  <div>
-                    <div className="font-mono text-[0.68rem] uppercase tracking-[0.22em] text-ink/60 mb-3">
-                      To
-                    </div>
-                    <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-14 h-14 rounded-full bg-paper border-2 border-ink flex items-center justify-center overflow-hidden shrink-0 shadow-[3px_3px_0_var(--ink)]">
                       <img
                         src={p.toImage}
                         alt={p.to}
                         className="w-10 h-10 object-contain"
                         onError={(e) => {
-                          (e.target as HTMLImageElement).style.display = 'none';
+                          (e.target as HTMLImageElement).style.display = "none";
                         }}
                       />
-                      <div className="font-display text-[1.75rem] md:text-[2rem] leading-[1.05] tracking-[-0.02em] text-ink">
-                        {p.to}
-                      </div>
+                    </div>
+                    <div className="font-display text-[1.55rem] md:text-[1.75rem] leading-tight tracking-[-0.02em] text-ink">
+                      {p.to}
                     </div>
                   </div>
                 </div>
 
-                <p className="text-[0.95rem] leading-[1.5] text-ink/75">{p.reason}</p>
+                {/* Reason */}
+                <p className="relative font-body text-[0.94rem] leading-[1.5] text-ink/75 mb-5">
+                  {p.reason}
+                </p>
 
-                <div className="pt-4 border-t border-ink/10 flex items-center justify-between font-mono text-[0.68rem] uppercase tracking-[0.16em]">
-                  <span className="text-ink/70">{p.price}</span>
-                  <span className="text-ink/50">{p.meta}</span>
+                {/* Footer */}
+                <div className="relative pt-4 border-t border-ink/15 flex items-center justify-between font-mono text-[0.65rem] uppercase tracking-[0.16em]">
+                  <span className="text-ink/70 font-semibold">{p.price}</span>
+                  <span className="text-ink/45">{p.meta}</span>
                 </div>
               </article>
             );

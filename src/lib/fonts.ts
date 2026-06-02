@@ -1,4 +1,4 @@
-import { Fraunces, Geist, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Geist, JetBrains_Mono, Caveat } from "next/font/google";
 
 export const fraunces = Fraunces({
   variable: "--f-display",
@@ -22,8 +22,16 @@ export const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+export const caveat = Caveat({
+  variable: "--f-hand",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
 export const fontVariables = [
   fraunces.variable,
   geist.variable,
   jetbrainsMono.variable,
+  caveat.variable,
 ].join(" ");

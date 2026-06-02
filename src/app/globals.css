@@ -63,6 +63,7 @@
   --font-display: var(--f-display);
   --font-body: var(--f-body);
   --font-mono: var(--f-mono);
+  --font-hand: var(--f-hand);
 }
 
 html,
@@ -292,3 +293,176 @@ a:focus-visible, button:focus-visible {
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--paper); }
 ::-webkit-scrollbar-thumb { background: var(--ink); border: 2px solid var(--paper); border-radius: 0; }
+
+/* ─────────────────────────────────────────────────────────────
+   V2 — Playful / WonderKids-inspired utilities
+   ───────────────────────────────────────────────────────────── */
+
+/* Handwritten font */
+.font-hand {
+  font-family: var(--f-hand), "Comic Sans MS", cursive;
+  font-weight: 500;
+}
+
+/* Scribble underline — hand-drawn arc beneath text */
+.scribble-underline {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+.scribble-underline svg {
+  position: absolute;
+  left: -4%;
+  bottom: -0.35em;
+  width: 108%;
+  height: 0.55em;
+  pointer-events: none;
+}
+
+/* Sun-burst / scalloped badge using radial mask */
+.badge-sun {
+  background: var(--yellow-bright);
+  -webkit-mask: radial-gradient(circle at 50% -8%, transparent 6%, #000 7%) 0 0/14% 14% repeat-x,
+                radial-gradient(circle at 50% 108%, transparent 6%, #000 7%) 0 100%/14% 14% repeat-x,
+                radial-gradient(circle at -8% 50%, transparent 6%, #000 7%) 0 0/14% 14% repeat-y,
+                radial-gradient(circle at 108% 50%, transparent 6%, #000 7%) 100% 0/14% 14% repeat-y,
+                linear-gradient(#000, #000);
+  mask: radial-gradient(circle at 50% -8%, transparent 6%, #000 7%) 0 0/14% 14% repeat-x,
+        radial-gradient(circle at 50% 108%, transparent 6%, #000 7%) 0 100%/14% 14% repeat-x,
+        radial-gradient(circle at -8% 50%, transparent 6%, #000 7%) 0 0/14% 14% repeat-y,
+        radial-gradient(circle at 108% 50%, transparent 6%, #000 7%) 100% 0/14% 14% repeat-y,
+        linear-gradient(#000, #000);
+  -webkit-mask-composite: source-over;
+  mask-composite: add;
+}
+
+/* Spin slow */
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin-slow 18s linear infinite; }
+
+/* Squircle — generous rounded */
+.squircle {
+  border-radius: 36px;
+}
+.squircle-lg {
+  border-radius: 48px;
+}
+
+/* Stamp pill — hashtag style */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-family: var(--f-body), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
+}
+
+/* Decorative dot grid */
+.dot-grid {
+  background-image: radial-gradient(currentColor 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+}
+
+/* Decorative squiggle (CSS-only) */
+.squiggle {
+  --c: currentColor;
+  background:
+    radial-gradient(circle at 25% 50%, transparent 5px, var(--c) 5px 7px, transparent 7px),
+    radial-gradient(circle at 75% 50%, transparent 5px, var(--c) 5px 7px, transparent 7px);
+  background-size: 20px 12px;
+  background-repeat: repeat-x;
+  height: 12px;
+}
+
+/* Tilt utilities */
+.tilt-l { transform: rotate(-2deg); }
+.tilt-r { transform: rotate(2deg); }
+.tilt-l-strong { transform: rotate(-5deg); }
+.tilt-r-strong { transform: rotate(5deg); }
+
+/* Soft drop shadow card */
+.drop-card {
+  box-shadow: 0 4px 0 rgba(10,10,10,0.08), 0 24px 48px -20px rgba(10,10,10,0.15);
+}
+
+/* Playful button */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.95rem 1.7rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s var(--ease);
+}
+.btn-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--ink);
+  background: var(--signal-deep);
+}
+.btn-pill-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.95rem 1.7rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  transition: transform 0.2s var(--ease), background 0.2s var(--ease), color 0.2s var(--ease);
+}
+.btn-pill-ghost:hover {
+  background: var(--yellow-bright);
+  transform: translateY(-2px);
+}
+.btn-pill-arrow {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper);
+  color: var(--ink);
+  margin-left: 0.3rem;
+}
+
+/* Floating blob — animated subtle */
+@keyframes float-blob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(4deg); }
+}
+.float-slow { animation: float-blob 8s ease-in-out infinite; }
+.float-med { animation: float-blob 5.5s ease-in-out infinite; }
+
+/* Wave underline SVG helper */
+.wave-deco {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12'><path d='M0 6 Q 25 0 50 6 T 100 6' stroke='currentColor' stroke-width='2.5' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* Tape strip */
+.tape {
+  position: absolute;
+  background: rgba(251, 191, 36, 0.7);
+  border: 1px solid rgba(10,10,10,0.1);
+  width: 70px;
+  height: 22px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Big rounded "blob" backgrounds */
+.blob-1 { border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%; }
+.blob-2 { border-radius: 40% 60% 45% 55% / 60% 40% 55% 45%; }
+.blob-3 { border-radius: 50% 50% 70% 30% / 40% 70% 30% 60%; }
