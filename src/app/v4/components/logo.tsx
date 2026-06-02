@@ -18,7 +18,7 @@ export function Logo({
 
   return (
     <Image
-      src="/biqolpo.png"
+      src="/biqolpo-watermark-v2.png"
       alt="biqolpo"
       width={w}
       height={h}

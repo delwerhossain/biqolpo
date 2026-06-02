@@ -1,213 +1,244 @@
 "use client";
 
-import { ArrowRight, Award, Heart, Tag, TrendingUp } from "lucide-react";
+import { Award, Heart, Tag } from "lucide-react";
 
 type Pick = {
-  category: string;
+  tag: string;
   from: string;
   fromImage: string;
-  fromPrice: string;
   to: string;
   toImage: string;
-  toPrice: string;
-  bestFor: string;
-  type: "Free" | "Cheaper" | "Healthier" | "Local";
-  badge: "Editor" | "Health" | "Budget";
+  reason: string;
+  price: string;
+  badge: string;
+  meta: string;
+  color: "purple" | "yellow" | "green";
 };
 
 const PICKS: Pick[] = [
   {
-    category: "AI & Software",
+    tag: "AI & Software",
     from: "ChatGPT Plus",
-    fromImage: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
-    fromPrice: "৳2,400 / mo",
+    fromImage:
+      "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
     to: "DeepSeek + Gemini",
-    toImage: "https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/deepseek-color.png",
-    toPrice: "Free",
-    bestFor: "Free AI use",
-    type: "Free",
-    badge: "Editor",
+    toImage:
+      "https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/deepseek-color.png",
+    reason:
+      "Two free frontier models cover ~92% of paid-tier use cases. Use DeepSeek for code, Gemini for long context.",
+    price: "৳2,400/mo  →  Free",
+    badge: "Editor's pick",
+    meta: "Tested · 11 days ago",
+    color: "purple",
   },
   {
-    category: "Food",
-    from: "Broiler chicken",
-    fromImage: "https://images.unsplash.com/photo-1587593810167-a84920ea0781?w=200&q=80",
-    fromPrice: "৳200 / kg",
+    tag: "Food",
+    from: "Broiler Chicken",
+    fromImage:
+      "https://images.unsplash.com/photo-1587593810167-a84920ea0781?w=400&q=80",
     to: "Sonali / Deshi",
-    toImage: "https://images.unsplash.com/photo-1612170153139-6f881ff067e0?w=200&q=80",
-    toPrice: "৳320 / kg",
-    bestFor: "Family weekly meal",
-    type: "Healthier",
-    badge: "Health",
+    toImage:
+      "https://images.unsplash.com/photo-1612170153139-6f881ff067e0?w=400&q=80",
+    reason:
+      "Lower antibiotic residue, better flavour, supports small Bangladeshi farms. Modest price premium worth it for weekly use.",
+    price: "৳200/kg  →  ৳320/kg",
+    badge: "Health pick",
+    meta: "Verified · 4 days ago",
+    color: "yellow",
   },
   {
-    category: "Tools",
+    tag: "Tools",
     from: "Canva Pro",
     fromImage: "https://www.canva.com/favicon.ico",
-    fromPrice: "৳1,500 / mo",
     to: "Penpot",
     toImage: "https://penpot.app/images/favicon.png",
-    toPrice: "Free",
-    bestFor: "Open-source design",
-    type: "Free",
-    badge: "Budget",
-  },
-  {
-    category: "Local",
-    from: "Imported honey",
-    fromImage: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=200&q=80",
-    fromPrice: "৳1,200 / 500g",
-    to: "Sundarban Mou",
-    toImage: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=200&q=80",
-    toPrice: "৳800 / 500g",
-    bestFor: "Single-origin honey",
-    type: "Local",
-    badge: "Editor",
-  },
-  {
-    category: "Healthier",
-    from: "Soft drinks",
-    fromImage: "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=200&q=80",
-    fromPrice: "৳35 / can",
-    to: "Daab / lebu pani",
-    toImage: "https://images.unsplash.com/photo-1610170796253-bc1d20415a02?w=200&q=80",
-    toPrice: "৳40 / piece",
-    bestFor: "Daily hydration",
-    type: "Healthier",
-    badge: "Health",
-  },
-  {
-    category: "Budget",
-    from: "Netflix Premium",
-    fromImage: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
-    fromPrice: "৳800 / mo",
-    to: "MUBI / library",
-    toImage: "https://upload.wikimedia.org/wikipedia/commons/5/56/MUBI_logo.png",
-    toPrice: "৳150 / mo",
-    bestFor: "Curated cinema",
-    type: "Cheaper",
-    badge: "Budget",
+    reason:
+      "Open-source, self-hostable, plays well with Figma exports. The Pro features you actually use are free here.",
+    price: "৳1,500/mo  →  Free",
+    badge: "Budget pick",
+    meta: "Community · 2 days ago",
+    color: "green",
   },
 ];
 
-const TYPE_STYLE: Record<Pick["type"], string> = {
-  Free: "v3-badge-green",
-  Cheaper: "v3-badge-yellow",
-  Healthier: "v3-badge-green",
-  Local: "v3-badge-yellow",
-};
-
-const BADGE_ICON: Record<Pick["badge"], typeof Award> = {
-  Editor: Award,
-  Health: Heart,
-  Budget: Tag,
+const COLOR: Record<
+  Pick["color"],
+  { card: string; badge: string; accent: string; blob: string; line: string }
+> = {
+  purple: {
+    card: "bg-green-alt",
+    badge: "bg-signal-deep text-paper",
+    accent: "text-signal-deep",
+    blob: "bg-signal-deep/20",
+    line: "#079128",
+  },
+  yellow: {
+    card: "bg-yellow-light",
+    badge: "bg-yellow-bright text-ink",
+    accent: "text-ink",
+    blob: "bg-yellow-bright/40",
+    line: "#fbbf24",
+  },
+  green: {
+    card: "bg-signal/20",
+    badge: "bg-signal text-ink",
+    accent: "text-signal-deep",
+    blob: "bg-signal/40",
+    line: "#079128",
+  },
 };
 
 export function Featured() {
   return (
-    <section id="featured" className="bg-surface-soft py-14 md:py-20">
-      <div className="mx-auto max-w-[1180px] px-5 md:px-10">
-        <div className="flex items-end justify-between gap-4 mb-8 md:mb-10">
+    <section id="featured" className="relative bg-paper py-20 md:py-28 overflow-hidden">
+      {/* Floating decoration */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute top-10 left-[6%] w-24 h-24 blob-1 bg-green-alt/60 float-slow" />
+        <div className="absolute bottom-20 right-[5%] w-32 h-32 blob-3 bg-yellow-light/70 float-med" />
+      </div>
+
+      <div className="mx-auto max-w-[1320px] px-5 md:px-10">
+        {/* Section header */}
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-14 md:mb-20">
           <div>
-            <div className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted-2 mb-2 inline-flex items-center gap-1.5">
-              <TrendingUp size={12} strokeWidth={2.5} className="text-primary" />
-              This week
+            <div className="inline-flex items-center gap-2 pill bg-yellow-light border border-ink mb-5">
+              <span className="w-2 h-2 rounded-full bg-signal-deep" />
+              <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em]">
+                This week
+              </span>
             </div>
-            <h2 className="font-display font-light leading-[1.1] tracking-[-0.02em] text-[1.7rem] md:text-[2.4rem] text-text-deep">
-              Trending alternatives
+            <h2 className="font-display font-light leading-[1.05] tracking-[-0.025em] text-[clamp(2rem,5.5vw,4.2rem)] text-ink">
+              The alternatives,{" "}
+              <span className="relative inline-block scribble-underline">
+                <em className="italic text-signal-deep font-medium">
+                  handpicked.
+                </em>
+                <svg viewBox="0 0 200 16" preserveAspectRatio="none">
+                  <path
+                    d="M4 9 Q 50 1 100 8 T 196 7"
+                    stroke="#079128"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                </svg>
+              </span>
             </h2>
           </div>
           <a
             href="/alternatives"
-            className="hidden sm:inline-flex items-center gap-1 text-[0.85rem] font-semibold text-primary-dark hover:text-primary"
+            className="btn-pill-ghost text-[0.85rem]"
           >
             See all swaps →
           </a>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
           {PICKS.map((p, i) => {
-            const BadgeIcon = BADGE_ICON[p.badge];
+            const c = COLOR[p.color];
+            const tilt = i % 2 === 0 ? "md:tilt-l" : "md:tilt-r";
             return (
-              <article key={i} className="v3-card p-5 md:p-6">
-                <div className="flex items-center justify-between mb-5">
-                  <span className="v3-badge v3-badge-soft">
-                    {p.category}
+              <article
+                key={i}
+                className={`${c.card} squircle p-7 md:p-8 relative overflow-hidden drop-card transition-transform duration-300 hover:-translate-y-2 ${tilt} hover:rotate-0`}
+              >
+                {/* Blob decoration */}
+                <div
+                  className={`absolute -top-10 -right-10 w-32 h-32 blob-2 ${c.blob}`}
+                />
+                <div className="absolute top-6 right-6 w-12 h-12 dot-grid text-ink/20 rounded-full" />
+
+                {/* Header — tag + badge */}
+                <div className="relative flex items-center justify-between mb-6">
+                  <span className={`font-mono text-[0.7rem] uppercase tracking-[0.2em] ${c.accent}`}>
+                    {p.tag}
                   </span>
-                  <span className={`v3-badge ${TYPE_STYLE[p.type]} inline-flex items-center gap-1`}>
-                    <BadgeIcon size={11} strokeWidth={2.5} />
-                    {p.type}
+                  <span className={`pill ${c.badge} text-[0.7rem] uppercase tracking-[0.14em] font-mono py-1 px-3 border border-ink/20 inline-flex items-center gap-1.5`}>
+                    {p.badge === "Editor's pick" && <Award size={12} strokeWidth={2.5} />}
+                    {p.badge === "Health pick" && <Heart size={12} strokeWidth={2.5} />}
+                    {p.badge === "Budget pick" && <Tag size={12} strokeWidth={2.5} />}
+                    {p.badge}
                   </span>
                 </div>
 
-                <div className="space-y-4">
-                  <div>
-                    <div className="text-[0.7rem] uppercase tracking-[0.15em] text-muted-2 mb-1.5">
-                      From
-                    </div>
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 rounded-full bg-cream-deep border border-border-soft flex items-center justify-center overflow-hidden shrink-0">
-                        <img
-                          src={p.fromImage}
-                          alt=""
-                          className="w-6 h-6 object-contain"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = "none";
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <div className="font-display text-[1rem] leading-tight text-text-deep/55 line-through decoration-2 decoration-accent">
-                          {p.from}
-                        </div>
-                        <div className="text-[0.74rem] text-muted-2">{p.fromPrice}</div>
-                      </div>
-                    </div>
+                {/* FROM */}
+                <div className="relative mb-3">
+                  <div className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-ink/55 mb-2">
+                    From
                   </div>
-
-                  <div className="flex justify-center">
-                    <ArrowRight size={18} strokeWidth={2.2} className="text-primary" />
-                  </div>
-
-                  <div>
-                    <div className="text-[0.7rem] uppercase tracking-[0.15em] text-muted-2 mb-1.5">
-                      To
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-paper border-2 border-ink/20 flex items-center justify-center overflow-hidden shrink-0">
+                      <img
+                        src={p.fromImage}
+                        alt={p.from}
+                        className="w-9 h-9 object-contain"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none";
+                        }}
+                      />
                     </div>
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-10 h-10 rounded-full bg-primary-tint border border-primary/30 flex items-center justify-center overflow-hidden shrink-0">
-                        <img
-                          src={p.toImage}
-                          alt=""
-                          className="w-7 h-7 object-contain"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = "none";
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <div className="font-display text-[1.18rem] leading-tight text-text-deep">
-                          {p.to}
-                        </div>
-                        <div className="text-[0.78rem] text-primary-dark font-semibold">
-                          {p.toPrice}
-                        </div>
-                      </div>
+                    <div className="font-display text-[1.25rem] leading-tight line-through decoration-2 decoration-warn text-ink/50">
+                      {p.from}
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-border-soft">
-                  <div className="text-[0.78rem] text-muted-2 mb-3">
-                    Best for:{" "}
-                    <span className="text-text-deep font-medium">{p.bestFor}</span>
-                  </div>
-                  <a
-                    href="/alternatives"
-                    className="v3-btn-ghost !min-h-[40px] !text-[0.84rem] w-full"
+                {/* Arrow */}
+                <div className="relative my-4 flex items-center justify-center">
+                  <svg
+                    className="w-20 h-10"
+                    viewBox="0 0 100 50"
+                    fill="none"
                   >
-                    View comparison
-                    <ArrowRight size={14} strokeWidth={2.5} />
-                  </a>
+                    <path
+                      d="M 10 10 Q 50 50 90 15"
+                      stroke={c.line}
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+                    <path
+                      d="M 82 8 L 90 15 L 84 25"
+                      stroke={c.line}
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      fill="none"
+                    />
+                  </svg>
+                </div>
+
+                {/* TO */}
+                <div className="relative mb-5">
+                  <div className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-ink/55 mb-2">
+                    To
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-14 h-14 rounded-full bg-paper border-2 border-ink flex items-center justify-center overflow-hidden shrink-0 shadow-[3px_3px_0_var(--ink)]">
+                      <img
+                        src={p.toImage}
+                        alt={p.to}
+                        className="w-10 h-10 object-contain"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none";
+                        }}
+                      />
+                    </div>
+                    <div className="font-display text-[1.55rem] md:text-[1.75rem] leading-tight tracking-[-0.02em] text-ink">
+                      {p.to}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Reason */}
+                <p className="relative font-body text-[0.94rem] leading-[1.5] text-ink/75 mb-5">
+                  {p.reason}
+                </p>
+
+                {/* Footer */}
+                <div className="relative pt-4 border-t border-ink/15 flex items-center justify-between font-mono text-[0.65rem] uppercase tracking-[0.16em]">
+                  <span className="text-ink/70 font-semibold">{p.price}</span>
+                  <span className="text-ink/45">{p.meta}</span>
                 </div>
               </article>
             );

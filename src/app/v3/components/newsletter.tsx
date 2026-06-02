@@ -1,72 +1,107 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Check, Mail } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 
 export function Newsletter() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
 
   return (
-    <section className="bg-surface py-14 md:py-20">
-      <div className="mx-auto max-w-[1180px] px-5 md:px-10">
-        <div className="v3-card bg-cream p-6 md:p-10 max-w-[860px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
+    <section className="relative bg-yellow-light py-20 md:py-28 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute top-10 left-[5%] w-32 h-32 blob-1 bg-signal-deep/15 float-slow" />
+        <div className="absolute bottom-10 right-[8%] w-40 h-40 blob-3 bg-signal/30 float-med" />
+        <div className="absolute top-1/3 right-[10%] w-20 h-20 dot-grid text-signal-deep/30 rounded-full" />
+      </div>
+
+      <div className="mx-auto max-w-[1100px] px-5 md:px-10">
+        <div className="bg-paper squircle p-8 md:p-12 relative overflow-hidden drop-card">
+          {/* Tape decoration top corners */}
+          <span className="tape -top-2 left-10 -rotate-12" />
+          <span className="tape -top-2 right-10 rotate-12" />
+
+          {/* Decoration blob */}
+          <div className="absolute -bottom-16 -right-16 w-48 h-48 blob-2 bg-green-alt/60" />
+
+          <div className="relative grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div>
-              <div className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted-2 mb-2 inline-flex items-center gap-1.5">
-                <Mail size={12} strokeWidth={2.5} className="text-primary" />
-                Friday Swap
+              <div className="inline-flex items-center gap-2 pill bg-green-alt border border-ink mb-5">
+                <span className="w-2 h-2 rounded-full bg-signal-deep" />
+                <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em]">
+                  Weekly swap
+                </span>
               </div>
-              <h2 className="font-display font-light leading-[1.1] tracking-[-0.02em] text-[1.7rem] md:text-[2.3rem] text-text-deep">
+              <h2 className="font-display font-light leading-[1.05] tracking-[-0.025em] text-[clamp(2rem,4.5vw,3.5rem)] text-ink mb-5">
                 One swap, every{" "}
-                <span className="scribble-v3 text-primary-dark italic font-medium">
-                  Friday.
+                <span className="relative inline-block scribble-underline">
+                  <em className="italic text-signal-deep font-medium">
+                    Friday.
+                  </em>
+                  <svg viewBox="0 0 200 16" preserveAspectRatio="none">
+                    <path
+                      d="M4 9 Q 50 1 100 8 T 196 7"
+                      stroke="#fbbf24"
+                      strokeWidth="5"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+                  </svg>
                 </span>
               </h2>
-              <p className="mt-3 text-[0.95rem] text-muted-2 leading-[1.6] max-w-[36ch]">
-                Short, researched. One product, one better alternative, and
-                where to buy it in Bangladesh.
+              <p className="font-body text-ink/75 text-[1rem] leading-[1.6] max-w-[36ch]">
+                Short, well-researched. One product, one better alternative,
+                the why — and where to get it in Bangladesh.
               </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <span className="v3-badge v3-badge-green inline-flex items-center gap-1.5">
-                  <Check size={11} strokeWidth={2.5} /> No spam
+
+              <div className="mt-6 flex flex-wrap gap-2">
+                <span className="pill bg-signal/30 text-ink text-[0.78rem] inline-flex items-center gap-1.5">
+                  <Check size={14} strokeWidth={2.5} /> No spam
                 </span>
-                <span className="v3-badge v3-badge-yellow inline-flex items-center gap-1.5">
-                  <Check size={11} strokeWidth={2.5} /> No affiliate links
+                <span className="pill bg-green-alt text-signal-deep text-[0.78rem] inline-flex items-center gap-1.5">
+                  <Check size={14} strokeWidth={2.5} /> No affiliate noise
                 </span>
               </div>
             </div>
 
             <form
+              className="flex flex-col gap-4"
               onSubmit={(e) => {
                 e.preventDefault();
                 if (email.trim()) setSent(true);
               }}
-              className="space-y-3"
             >
-              <label className="block text-[0.72rem] uppercase tracking-[0.15em] text-muted-2">
+              <label className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-ink/65">
                 Your email
               </label>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@bangladesh.bd"
-                className="v3-input !pl-4"
-              />
-              <button type="submit" className="v3-btn w-full">
-                {sent ? (
-                  <>
-                    <Check size={16} strokeWidth={2.5} /> See you Friday
-                  </>
-                ) : (
-                  <>
-                    Subscribe <ArrowRight size={15} strokeWidth={2.5} />
-                  </>
-                )}
-              </button>
-              <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-muted-2 text-center">
+              <div className="flex flex-col gap-3">
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@bangladesh.bd"
+                  className="w-full bg-yellow-light/50 border-2 border-ink rounded-full px-5 py-3.5 text-ink placeholder:text-ink/40 font-body text-[1rem] outline-none focus:bg-paper focus:border-signal-deep transition"
+                />
+                <button
+                  type="submit"
+                  className="btn-pill justify-center w-full"
+                >
+                  {sent ? (
+                    <>
+                      <Check size={16} strokeWidth={2.5} /> Thanks. See you Friday.
+                    </>
+                  ) : (
+                    <>
+                      Subscribe
+                      <span className="btn-pill-arrow">
+                        <ArrowUpRight size={16} strokeWidth={2.5} />
+                      </span>
+                    </>
+                  )}
+                </button>
+              </div>
+              <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-ink/50">
                 Free · weekly · unsubscribe anytime
               </p>
             </form>
