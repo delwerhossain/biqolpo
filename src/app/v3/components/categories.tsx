@@ -123,9 +123,12 @@ export function Categories() {
               <Link
                 key={c.n}
                 href="/alternatives"
-                className={`${s.bg} ${s.text} squircle p-6 md:p-7 relative overflow-hidden group transition-all duration-300 hover:-translate-y-1 drop-card border border-ink/8`}
+                className={`${s.bg} ${s.text} squircle p-6 md:p-7 relative overflow-hidden group transition-all duration-300 hover:-translate-y-2 drop-card`}
               >
-                <div className="flex items-center justify-between mb-10 md:mb-14">
+                {/* Corner blob behind icon */}
+                <div className={`absolute -top-6 -right-6 w-24 h-24 blob-1 ${s.blob} opacity-60`} />
+
+                <div className="relative flex items-center justify-between mb-10 md:mb-14">
                   <span className="font-mono text-[0.65rem] uppercase tracking-[0.22em] opacity-70">
                     {c.n}
                   </span>
@@ -134,7 +137,7 @@ export function Categories() {
                   </span>
                 </div>
 
-                <div>
+                <div className="relative">
                   <div className="font-display text-[1.55rem] md:text-[1.8rem] leading-[1.05] tracking-[-0.02em] mb-2">
                     {c.name}
                   </div>
