@@ -9,21 +9,22 @@ export function Logo({
   invert?: boolean;
   className?: string;
 }) {
+  // Source art is 5948 × 1720 → aspect ratio ≈ 3.458 : 1
   const dims = {
-    sm: { w: 90, h: 28 },
-    md: { w: 120, h: 36 },
-    lg: { w: 170, h: 50 },
+    sm: { w: 97, h: 28 },
+    md: { w: 124, h: 36 },
+    lg: { w: 173, h: 50 },
   } as const;
   const { w, h } = dims[size];
 
   return (
     <Image
-      src="/biqolpo-watermark-v2.png"
+      src={invert ? "/biqolpo-white.png" : "/biqolpo-main.png"}
       alt="biqolpo"
       width={w}
       height={h}
       priority
-      className={`object-contain ${invert ? "invert" : ""} ${className}`}
+      className={`object-contain ${className}`}
       style={{ width: w, height: "auto" }}
     />
   );
