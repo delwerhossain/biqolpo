@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Logo } from "./logo";
 
 export function Footer() {
@@ -81,10 +82,15 @@ export function Footer() {
         </div>
 
         {/* Giant wordmark */}
-        <div className="mt-20 border-t border-paper/15 pt-10 pb-4 overflow-hidden text-center">
-          <div className="font-display italic text-[clamp(4rem,18vw,16rem)] leading-[0.85] tracking-[-0.04em] text-paper/15 select-none">
-            biqolpo.
-          </div>
+        <div className="mt-20 border-t border-paper/15 pt-10 pb-4 overflow-hidden">
+          <Image
+            src="/biqolpo-white.png"
+            alt="biqolpo"
+            width={5948}
+            height={1720}
+            sizes="100vw"
+            className="w-full h-auto select-none pointer-events-none opacity-90"
+          />
         </div>
 
         <div className="border-t border-paper/15 pt-6 flex flex-wrap items-center justify-between gap-3 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-paper/50">
